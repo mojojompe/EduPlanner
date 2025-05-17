@@ -1,0 +1,9 @@
+EduPlanner: A comprehensive web application designed to enhance students' academic organization and productivity. 
+The app will feature:
+- User authentication (sign-up and login) with secure authorization
+- Course management system for adding and organizing study materials
+- Interactive timetable creation for scheduling study sessions
+- Personal note-taking area for quick thoughts and study summaries
+- Built-in calculator for academic computations
+
+copyright Goftem Technologies. 2025 
