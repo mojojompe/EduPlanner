@@ -10,18 +10,31 @@ import { Navigator } from 'expo-router';
 
 export default function LandingPage() {
   return (
-    <View style = { styles.mainView}>
+    <View style={styles.mainView}>
       <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={styles.keyboardAvoidingView}>
-            <Image style={styles.image} source={require('../assets/images/Logo White.png')}></Image>  <Text style = {styles.head}>EduPlanner</Text>
-            <Text style = {styles.bodyText}>Your Best Study Planner.</Text>
-            <Text style = {styles.downText}>Let's Get Started !</Text>
-            <TouchableOpacity style={{ paddingTop: 20 }}><AntDesign name="arrowright" size={65} paddingLeft={250} marginTop={-95} color= '#0093baff' onPress={() => navigator.navigate('/Login')} />
-            </TouchableOpacity>
-          </KeyboardAvoidingView>
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.keyboardAvoidingView}
+      >
+        <Image
+          style={styles.image}
+          source={require("../assets/images/Logo White.png")}
+        ></Image>{" "}
+        <Text style={styles.head}>EduPlanner</Text>
+        <Text style={styles.bodyText}>Your Best Study Planner.</Text>
+        <Text style={styles.downText}>Let's Get Started !</Text>
+        <TouchableOpacity style={{ paddingTop: 20 }}>
+          <AntDesign
+            name="arrowright"
+            size={65}
+            paddingLeft={250}
+            marginTop={-95}
+            color="#0093baff"
+            onPress={() => navigate("/Pages/Login.js")}
+          />
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
