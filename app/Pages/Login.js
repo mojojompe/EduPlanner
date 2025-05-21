@@ -50,7 +50,7 @@ return (
           </TouchableOpacity>
           
           <Text style={styles.footerText}>
-            Don't have an account?{' '} <TouchableOpacity onPress={() => navigator.navigate('/Signup')}> <Text style={styles.signUpText}>Sign up</Text> </TouchableOpacity>
+            Don't have an account?{' '} <TouchableOpacity onPress={() => navigator.navigate("/app/Pages/Signup.js")}> <Text style={styles.signUpText}>Sign up</Text> </TouchableOpacity>
           </Text>
           <TouchableOpacity onPress={() => Alert.alert('Oops, Try remembering your Password, Dumbass!!')}>
             <Text style={styles.forgotPasswordText}>Forgot Password?</Text>

@@ -8,6 +8,8 @@ export const Routes = () => {
         <Router>
             <Routes>
                 <Route path="/Pages/Login.js" element={<Login/>} />
+                <Route path="/app/Pages/Signup.js" element={<Signup/>} />
+                <Route path="/app/Pages/LandingPage.js" element={<LandingPage/>} />
             </Routes>
         </Router>
     )
