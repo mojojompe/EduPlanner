@@ -1,9 +1,46 @@
-EduPlanner: A comprehensive web application designed to enhance students' academic organization and productivity. 
-The app will feature:
-- User authentication (sign-up and login) with secure authorization
-- Course management system for adding and organizing study materials
-- Interactive timetable creation for scheduling study sessions
-- Personal note-taking area for quick thoughts and study summaries
-- Built-in calculator for academic computations
+EduPlanner — Comprehensive Academic Organizer & Productivity App
 
-copyright Goftem Technologies. 2025 
+EduPlanner is a cross-platform mobile application designed to help students stay organized, productive, and academically efficient. The app combines essential study tools into one seamless experience, ensuring students can manage their coursework and schedules with ease.
+
+Key Features
+1. Secure User Authentication
+
+Create accounts via sign-up or access through login
+
+Strong authorization and data protection mechanisms
+
+Ensures user privacy and safe data handling
+
+2. Course Management System
+
+Add, organize, and track courses
+
+Upload or attach study materials
+
+Categorize content by subjects, semesters, or classes
+
+Quick access to all academic resources in one place
+
+3. Interactive Timetable & Scheduling
+
+Build custom timetables for classes or study sessions
+
+Set reminders for upcoming tasks or study blocks
+
+Visual weekly planner for better time management
+
+Helps prevent missed deadlines and boosts consistency
+
+4. Personal Note-Taking Area
+
+Add quick thoughts, summaries, or study points
+
+Organized notes for each course or topic
+
+Supports rich formatting options (depending on final implementation)
+
+5. Built-In Calculator
+
+Lightweight academic calculator for quick computations
+
+Always accessible within the app for convenience

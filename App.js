@@ -7,15 +7,11 @@ import Signup from "./app/Pages/Signup";
 export default function App() {
     return (
         <View>
-        <LandingPage>
-
-        </LandingPage>
+        <LandingPage />
         <Login>
             <StatusBar style="auto" />
         </Login>
-        <Signup>
-            
-        </Signup>
+        <Signup />
         </View>
     );
 }

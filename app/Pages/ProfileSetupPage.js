@@ -10,6 +10,7 @@ export default function ProfileSetupPage() {
         <View style={styles.mainView}>
              <TouchableOpacity>
              <Feather name="x" size={90} color="black" />
+             
             </TouchableOpacity>
         </View>
     </View>

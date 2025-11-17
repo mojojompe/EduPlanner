@@ -63,7 +63,7 @@ return (
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
-    backgroundColor: '#009EBAFF',
+    backgroundColor: 'N',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
