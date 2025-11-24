@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { useFonts } from "expo-font";
+import { useFonts, Poppins_400Regular, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { View } from "react-native";
@@ -10,8 +10,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
     const [loaded] = useFonts({
-        Poppins: require("../assets/fonts/Poppins-Regular.ttf"), // Assuming fonts are here or need to be added
-        "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
+        Poppins: Poppins_400Regular,
+        "Poppins-Bold": Poppins_700Bold,
     });
 
     useEffect(() => {
