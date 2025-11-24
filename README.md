@@ -1,4 +1,4 @@
-# Welcome to EduPlanner by EMMANUEL AYOMIPOSI JOMPE 👋
+# Welcome to EduPlanner by EMMANUEL AYOMIPOSI JOMPE
 
 EduPLanner: A Comprehensive mobile Application designed to enhance Student's academic organisation and Productivity. Built with React Native, Node.js, Express, Strapi, MongoDB
 
