@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import "../global.css";
+import { AuthProvider } from "../context/AuthContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -25,14 +26,16 @@ export default function RootLayout() {
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            <StatusBar style="light" />
-            <Stack screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="index" />
-                <Stack.Screen name="(auth)" />
-                <Stack.Screen name="(tabs)" />
-                <Stack.Screen name="modals" options={{ presentation: "modal" }} />
-            </Stack>
-        </View>
+        <AuthProvider>
+            <View style={{ flex: 1 }}>
+                <StatusBar style="light" />
+                <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="index" />
+                    <Stack.Screen name="(auth)" />
+                    <Stack.Screen name="(tabs)" />
+                    <Stack.Screen name="modals" options={{ presentation: "modal" }} />
+                </Stack>
+            </View>
+        </AuthProvider>
     );
 }

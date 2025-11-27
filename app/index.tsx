@@ -66,7 +66,7 @@ export default function LandingPage() {
                     className="bg-white py-4 rounded-xl items-center shadow-lg"
                 >
                     <Text className="text-primary text-lg font-bold font-poppins">
-                        Let's Get Started !
+                        Let&apos;s Get Started !
                     </Text>
                 </TouchableOpacity>
             </Animated.View>

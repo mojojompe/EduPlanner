@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInDown } from "react-native-reanimated";
-// import firestore from '@react-native-firebase/firestore';
+import { db, auth } from "../../firebaseConfig";
 
 export default function ProfileSetup() {
     const router = useRouter();
@@ -12,8 +12,27 @@ export default function ProfileSetup() {
     const [major, setMajor] = useState("");
 
     const handleSave = async () => {
-        // Save to Firestore
-        router.replace("/(tabs)/home");
+        if (!name || !university || !major) {
+            alert("Please fill in all fields");
+            return;
+        }
+        try {
+            const user = auth.currentUser;
+            if (!user) return;
+
+            await db.collection("users").doc(user.uid).set({
+                displayName: name,
+                university,
+                major,
+                email: user.email,
+                createdAt: new Date(),
+            });
+
+            router.replace("/(tabs)/home");
+        } catch (error: any) {
+            console.error(error);
+            alert("Failed to save profile: " + error.message);
+        }
     };
 
     return (

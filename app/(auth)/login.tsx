@@ -1,9 +1,12 @@
-import { View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Platform, ScrollView } from "react-native";
-import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, Image, ScrollView } from "react-native";
+import { useState } from "react";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
-// import auth from '@react-native-firebase/auth'; // Uncomment when ready
+import { auth } from "../../firebaseConfig";
+import { FirebaseError } from "firebase/app";
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { Ionicons } from "@expo/vector-icons";
 
 export default function Login() {
     const router = useRouter();
@@ -11,13 +14,47 @@ export default function Login() {
     const [password, setPassword] = useState("");
 
     const handleLogin = async () => {
-        // Implement Firebase Login here
-        // try {
-        //   await auth().signInWithEmailAndPassword(email, password);
-        router.replace("/(tabs)/home");
-        // } catch (error) {
-        //   console.error(error);
-        // }
+        if (!email || !password) {
+            alert("Please enter both email and password");
+            return;
+        }
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+            router.replace("/(tabs)/home");
+        } catch (error: any) {
+            console.error(error);
+            alert("Login failed: " + error.message);
+        }
+    };
+
+    const onGoogleButtonPress = async () => {
+        try {
+            // Check if your device supports Google Play
+            await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+            // Get the users ID token
+            const signInResult = await GoogleSignin.signIn();
+
+            // Try the new style of getting the idToken
+            let idToken = signInResult.data?.idToken;
+            if (!idToken) {
+                // Fallback for older versions or different response structure
+                idToken = signInResult.idToken;
+            }
+
+            if (!idToken) {
+                throw new Error('No ID token found');
+            }
+
+            // Create a Google credential with the token
+            const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+            // Sign-in the user with the credential
+            await auth.signInWithCredential(googleCredential);
+            router.replace("/(tabs)/home");
+        } catch (error: any) {
+            console.error(error);
+            alert("Google Sign-In failed: " + error.message);
+        }
     };
 
     return (
@@ -64,10 +101,24 @@ export default function Login() {
                     >
                         <Text className="text-white font-bold text-lg font-poppins">Sign In</Text>
                     </TouchableOpacity>
+
+                    <View className="flex-row items-center my-4">
+                        <View className="flex-1 h-[1px] bg-gray-300" />
+                        <Text className="mx-4 text-gray-500 font-poppins">OR</Text>
+                        <View className="flex-1 h-[1px] bg-gray-300" />
+                    </View>
+
+                    <TouchableOpacity
+                        onPress={onGoogleButtonPress}
+                        className="bg-white border border-gray-300 py-4 rounded-xl items-center shadow-sm flex-row justify-center"
+                    >
+                        <Ionicons name="logo-google" size={24} color="black" className="mr-3" />
+                        <Text className="text-gray-700 font-bold text-lg font-poppins ml-2">Sign in with Google</Text>
+                    </TouchableOpacity>
                 </Animated.View>
 
                 <Animated.View entering={FadeInDown.delay(600).duration(1000)} className="flex-row justify-center mt-10">
-                    <Text className="text-gray-500 font-poppins">Don't have an account? </Text>
+                    <Text className="text-gray-500 font-poppins">Don&apos;t have an account? </Text>
                     <TouchableOpacity onPress={() => router.push("/(auth)/signup")}>
                         <Text className="text-primary font-bold font-poppins">Sign Up</Text>
                     </TouchableOpacity>

@@ -10,7 +10,7 @@ export default function Calculator() {
         ["7", "8", "9", "*"],
         ["4", "5", "6", "-"],
         ["1", "2", "3", "+"],
-        ["0", ".", "=", ""],
+        ["0", ".", "=", "DEL"],
     ];
 
     return (
@@ -28,8 +28,9 @@ export default function Calculator() {
                                 className={`w-16 h-16 rounded-full items-center justify-center ${btn === '=' ? 'bg-primary' : 'bg-gray-700'}`}
                                 onPress={() => {
                                     if (btn === 'C') setDisplay("0");
+                                    else if (btn === 'DEL') setDisplay(prev => (prev.length <= 1 ? "0" : prev.slice(0, -1)));
                                     else if (btn === '=') setDisplay("Calculated"); // Implement logic
-                                    else if (btn !== "") setDisplay(prev => prev === "0" ? btn : prev + btn);
+                                    else setDisplay(prev => prev === "0" ? btn : prev + btn);
                                 }}
                             >
                                 <Text className="text-white text-2xl font-bold">{btn}</Text>

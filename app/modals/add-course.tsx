@@ -1,5 +1,6 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
 import React, { useState } from "react";
+import { useCourses } from "../../hooks/useCourses";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
@@ -7,6 +8,24 @@ export default function AddCourse() {
     const router = useRouter();
     const [courseName, setCourseName] = useState("");
     const [instructor, setInstructor] = useState("");
+    const { addCourse } = useCourses();
+    const [loading, setLoading] = useState(false);
+
+    const handleAddCourse = async () => {
+        if (!courseName || !instructor) {
+            alert("Please fill in all fields");
+            return;
+        }
+        setLoading(true);
+        try {
+            await addCourse(courseName, instructor);
+            router.back();
+        } catch (error: any) {
+            alert("Error adding course: " + error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <View className="flex-1 bg-white p-6">
@@ -38,9 +57,14 @@ export default function AddCourse() {
 
                 <TouchableOpacity
                     className="bg-primary py-4 rounded-xl items-center shadow-md mt-4"
-                    onPress={() => router.back()}
+                    onPress={handleAddCourse}
+                    disabled={loading}
                 >
-                    <Text className="text-white font-bold text-lg font-poppins">Add Course</Text>
+                    {loading ? (
+                        <ActivityIndicator color="white" />
+                    ) : (
+                        <Text className="text-white font-bold text-lg font-poppins">Add Course</Text>
+                    )}
                 </TouchableOpacity>
             </View>
         </View>

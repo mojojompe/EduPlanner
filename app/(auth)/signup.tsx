@@ -1,9 +1,9 @@
-import { View, Text, TextInput, TouchableOpacity, Image, ScrollView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInDown, FadeInUp } from "react-native-reanimated";
-// import auth from '@react-native-firebase/auth';
+import { auth } from "../../firebaseConfig";
 
 export default function Signup() {
     const router = useRouter();
@@ -12,14 +12,23 @@ export default function Signup() {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     const handleSignup = async () => {
-        // Implement Firebase Signup
-        // if (password !== confirmPassword) return alert("Passwords don't match");
-        // try {
-        //   await auth().createUserWithEmailAndPassword(email, password);
-        router.push("/(auth)/profile-setup");
-        // } catch (error) {
-        //   console.error(error);
-        // }
+        if (!email || !password || !confirmPassword) {
+            alert("Please fill in all fields");
+            return;
+        }
+        if (password !== confirmPassword) {
+            alert("Passwords don't match");
+            return;
+        }
+        try {
+            const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+            await userCredential.user.sendEmailVerification();
+            alert("Account created! Please check your email to verify your account.");
+            router.push("/(auth)/profile-setup");
+        } catch (error: any) {
+            console.error(error);
+            alert("Signup failed: " + error.message);
+        }
     };
 
     return (

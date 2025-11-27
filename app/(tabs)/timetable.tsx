@@ -1,9 +1,11 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useCourses } from "../../hooks/useCourses";
 
 export default function Timetable() {
     const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const { courses } = useCourses();
 
     return (
         <SafeAreaView className="flex-1 bg-gray-50">
@@ -26,9 +28,10 @@ export default function Timetable() {
                     <View key={hour} className="flex-row mb-4">
                         <Text className="w-16 text-gray-400 font-poppins pt-2">{hour}:00</Text>
                         <View className="flex-1 bg-white p-4 rounded-xl shadow-sm border-l-4 border-l-primary min-h-[80px]">
-                            {hour === 10 ? (
+                            {/* Simple logic to show a course if it exists (placeholder logic) */}
+                            {courses.length > 0 && hour === 10 ? (
                                 <>
-                                    <Text className="font-bold font-poppins">Mathematics</Text>
+                                    <Text className="font-bold font-poppins">{courses[0].name}</Text>
                                     <Text className="text-gray-500 text-xs">Room 301</Text>
                                 </>
                             ) : (
