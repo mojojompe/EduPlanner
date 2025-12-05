@@ -27,10 +27,27 @@ export default function Calculator() {
                                 key={btnIndex}
                                 className={`w-16 h-16 rounded-full items-center justify-center ${btn === '=' ? 'bg-primary' : 'bg-gray-700'}`}
                                 onPress={() => {
-                                    if (btn === 'C') setDisplay("0");
-                                    else if (btn === 'DEL') setDisplay(prev => (prev.length <= 1 ? "0" : prev.slice(0, -1)));
-                                    else if (btn === '=') setDisplay("Calculated"); // Implement logic
-                                    else setDisplay(prev => prev === "0" ? btn : prev + btn);
+                                    if (btn === 'C') {
+                                        setDisplay("0");
+                                    } else if (btn === 'DEL') {
+                                        setDisplay(prev => (prev.length <= 1 ? "0" : prev.slice(0, -1)));
+                                    } else if (btn === '=') {
+                                        try {
+                                            // Restricted characters for safety, though button input limits this anyway
+                                            const sanitized = display.replace(/[^0-9+\-*/.]/g, '');
+                                            // eslint-disable-next-line no-eval
+                                            const result = eval(sanitized);
+                                            setDisplay(String(result));
+                                        } catch (error) {
+                                            setDisplay("Error");
+                                        }
+                                    } else {
+                                        setDisplay(prev => {
+                                            if (prev === "0" && !['+', '-', '*', '/', '.'].includes(btn)) return btn;
+                                            if (prev === "Error") return btn;
+                                            return prev + btn;
+                                        });
+                                    }
                                 }}
                             >
                                 <Text className="text-white text-2xl font-bold">{btn}</Text>

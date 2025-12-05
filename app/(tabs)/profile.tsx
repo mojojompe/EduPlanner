@@ -3,6 +3,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { auth } from "../../firebaseConfig";
 
 export default function Profile() {
     const router = useRouter();
@@ -38,7 +39,14 @@ export default function Profile() {
 
                 <TouchableOpacity
                     className="bg-white p-4 rounded-xl flex-row items-center mb-3 shadow-sm mt-4"
-                    onPress={() => router.replace("/")}
+                    onPress={async () => {
+                        try {
+                            await auth.signOut();
+                            // Navigation to landing will be handled by _layout.tsx based on auth state
+                        } catch (error) {
+                            console.error("Error signing out: ", error);
+                        }
+                    }}
                 >
                     <View className="bg-red-100 p-2 rounded-lg mr-4">
                         <Ionicons name="log-out-outline" size={20} color="red" />
